@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: testmetrics
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: metrics-example-app
+  name: metrics-example-app
+  namespace: testmetrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-example-app
+  template:
+    metadata:
+      labels:
+        app: metrics-example-app
+    spec:
+      containers:
+      - image: docker.io/tmarkunin/test_metrics:1.0
+        imagePullPolicy: IfNotPresent
+        name: metrics-example-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: metrics-example-service
+  name: metrics-example-service
+  namespace: testmetrics
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+    name: web
+  selector:
+    app: metrics-example-app
+  type: ClusterIP
