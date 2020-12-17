@@ -1,7 +1,16 @@
-FROM nginx:1.19.5
+FROM registry.redhat.io/ubi8/nodejs-12:1-64
 
-WORKDIR /usr/share/nginx/html
+# Установка необходимых пакетов
+COPY package.json .
+RUN  npm install
 
-RUN mkdir static
+COPY app.js .
 
-COPY .  ./static
+#переменная окружения передающаяся внутрь контейнера
+ENV PORT 3000
+
+# Определение порта контейера, который будет открыт
+EXPOSE 3000
+
+# Команда, которая будет выполняться в контейнере
+CMD ["npm", "start"]
