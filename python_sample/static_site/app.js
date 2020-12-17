@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 
 
-app.get('/dynamic', function(req,res){ 
+app.get('/static', function(req,res){ 
          
     res.send("Static content from " + hostname );
 
