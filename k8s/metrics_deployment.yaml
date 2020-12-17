@@ -21,7 +21,7 @@ spec:
         app: metrics-example-app
     spec:
       containers:
-      - image: docker.io/tmarkunin/test_metrics:1.0
+      - image: docker.io/tmarkunin/test_metrics:logging
         imagePullPolicy: IfNotPresent
         name: metrics-example-app
 ---
