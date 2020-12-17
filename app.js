@@ -15,10 +15,23 @@ registry.registerMetric(gauge);
 registry.registerMetric(request_counter);
 gauge.set(0, new Date());
 
+//Logging initialization
+const pino = require('pino');
+const expressPino = require('express-pino-logger');
+
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+const expressLogger = expressPino({ logger });
+app.use(expressLogger);
+
+//get port from an environment variable
+const PORT = process.env.PORT || 3000;
+
+
 
 
 app.get('/healthz', function(req,res){ 
        
+     logger.debug('Calling healthz endpoint');  	
     //increment count metric
     request_counter.inc();
     
@@ -29,11 +42,11 @@ app.get('/healthz', function(req,res){
 app.get('/metrics', function(req,res){   
 	res.set('Content-Type', registry.contentType);
 	res.end(registry.metrics());
-	console.log("Metrics ")
+	logger.debug('Calling metrics endpoint');
 
 });
 
 
-var server = app.listen(3000, function(){
-    console.log('Listen om port 3000');
+var server = app.listen(PORT, function(){
+    logger.info('Server running on port %d', PORT);
 });
