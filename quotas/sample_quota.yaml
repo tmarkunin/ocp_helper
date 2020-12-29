@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: sample-quota
+spec:
+  hard:
+    pods: "20" 
+    requests.cpu: "1" 
+    requests.memory: 1Gi 
+    limits.cpu: "2" 
+    limits.memory: 2Gi
+    persistentvolumeclaims: "10" 
+    requests.storage: "50Gi" 
+    sc.storageclass.storage.k8s.io/requests.storage: "10Gi" 
+    thin.storageclass.storage.k8s.io/requests.storage: "5Gi" 
+    nfs.storageclass.storage.k8s.io/persistentvolumeclaims: "0" 
+   
