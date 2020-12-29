@@ -1,7 +1,6 @@
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
+kind: ClusterRole
 metadata:
-  namespace: the-project
   name: deployer
 rules:
 - apiGroups: ["apps","extensions"]
