@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mssql-test
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mssql-example-app
+  name: mssql-example-app
+  namespace: mssql-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mssql-example-app
+  template:
+    metadata:
+      labels:
+        app: mssql-example-app
+    spec:
+      containers:
+      - image: tmarkunin/test_mssql:1.0
+        imagePullPolicy: Always
+        name: mssql-example-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mssql-example-service
+  name: mssql-example-service
+  namespace: mssql-test
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+    name: node
+  selector:
+    app: mssql-example-app
+  type: ClusterIP
