@@ -35,7 +35,7 @@ app.get('/healthz', function(req,res){
     //increment count metric
     request_counter.inc();
     
-    res.send("working.....");
+    res.send("Working!!!!!.");
 
 });
 
