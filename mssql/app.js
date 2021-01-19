@@ -23,7 +23,7 @@ app.get('/mssql', function(req,res){
     async () => {
         try {
             // make sure that any items are correctly URL encoded in the connection string
-            await sql.connect('mssql://test_openshift:0pen$hifD@dev-aa-db.ural.evraz.com/kgok-7438-dev')
+            await sql.connect('mssql://test_openshift:')
             const result = await sql.query`select * from openshift`
             console.dir(result)
             res.send(result);
