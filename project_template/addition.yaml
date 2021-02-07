@@ -19,4 +19,16 @@ rules:
 - apiGroups: ["*"]
   resources: ["deployments","configmaps", "services", "persistentvolumeclaims","pods","secrets","ingresses", “networkpolicies”]
   verbs: ["create","get","delete","list","update","edit","watch","exec","patch"]
+  
+  
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  namespace: the-project
+  name: developer
+rules:
+- apiGroups: ["*"]
+  resources: ["["deployments","services", "pvcs","pods","ingresses"]]
+  verbs: ["get","describe","list","watch"]
+
 
