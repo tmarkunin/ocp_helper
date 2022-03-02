@@ -11,7 +11,7 @@ metadata:
   name: metrics-example-app
   namespace: testmetrics
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: metrics-example-app
